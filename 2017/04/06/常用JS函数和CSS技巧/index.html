@@ -89,20 +89,20 @@
 
 <meta name="description" content="这里罗列平时工作中比较常用的一些函数与字符处理，防止偶尔脑子短路，备查。持续更新……
 
-常用函数移动端Media12345678html&amp;#123;font-size:10px&amp;#125;@media screen and (min-width:321px) and (max-width:375px)&amp;#123;html&amp;#123;font-size:11px&amp;#125;&amp;#125;@media">
+常用函数获取URL参数12345678910111213141516171819202122232425function resolveUrl(url)&amp;#123;    var regParaName = /(\?|&amp;amp;&amp;#123;1,&amp;#125;)([\w\.\-]&amp;#123;0,&amp;#125;)=?">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用js函数与字符串处理（金额、时间等）">
 <meta property="og:url" content="http://badbun.github.io/2017/04/06/常用JS函数和CSS技巧/index.html">
 <meta property="og:site_name" content="Buns">
 <meta property="og:description" content="这里罗列平时工作中比较常用的一些函数与字符处理，防止偶尔脑子短路，备查。持续更新……
 
-常用函数移动端Media12345678html&amp;#123;font-size:10px&amp;#125;@media screen and (min-width:321px) and (max-width:375px)&amp;#123;html&amp;#123;font-size:11px&amp;#125;&amp;#125;@media">
-<meta property="og:updated_time" content="2017-04-06T06:06:01.603Z">
+常用函数获取URL参数12345678910111213141516171819202122232425function resolveUrl(url)&amp;#123;    var regParaName = /(\?|&amp;amp;&amp;#123;1,&amp;#125;)([\w\.\-]&amp;#123;0,&amp;#125;)=?">
+<meta property="og:updated_time" content="2017-04-06T06:13:09.495Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用js函数与字符串处理（金额、时间等）">
 <meta name="twitter:description" content="这里罗列平时工作中比较常用的一些函数与字符处理，防止偶尔脑子短路，备查。持续更新……
 
-常用函数移动端Media12345678html&amp;#123;font-size:10px&amp;#125;@media screen and (min-width:321px) and (max-width:375px)&amp;#123;html&amp;#123;font-size:11px&amp;#125;&amp;#125;@media">
+常用函数获取URL参数12345678910111213141516171819202122232425function resolveUrl(url)&amp;#123;    var regParaName = /(\?|&amp;amp;&amp;#123;1,&amp;#125;)([\w\.\-]&amp;#123;0,&amp;#125;)=?">
 
 
 
@@ -176,9 +176,6 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle">年少不努力，老大跟猪睡</p>
-      
   </div>
 
   <div class="site-nav-toggle">
@@ -350,7 +347,9 @@
         <blockquote>
 <p>这里罗列平时工作中比较常用的一些函数与字符处理，防止偶尔脑子短路，备查。持续更新……</p>
 </blockquote>
-<h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><h3 id="移动端Media"><a href="#移动端Media" class="headerlink" title="移动端Media"></a>移动端Media</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">html&#123;font-size:10px&#125;</div><div class="line">@media screen and (min-width:321px) and (max-width:375px)&#123;html&#123;font-size:11px&#125;&#125;</div><div class="line">@media screen and (min-width:376px) and (max-width:414px)&#123;html&#123;font-size:12px&#125;&#125;</div><div class="line">@media screen and (min-width:415px) and (max-width:639px)&#123;html&#123;font-size:15px&#125;&#125;</div><div class="line">@media screen and (min-width:640px) and (max-width:719px)&#123;html&#123;font-size:20px&#125;&#125;</div><div class="line">@media screen and (min-width:720px) and (max-width:749px)&#123;html&#123;font-size:22.5px&#125;&#125;</div><div class="line">@media screen and (min-width:750px) and (max-width:799px)&#123;html&#123;font-size:23.5px&#125;&#125;</div><div class="line">@media screen and (min-width:800px)&#123;html&#123;font-size:25px&#125;&#125;</div></pre></td></tr></table></figure>
+<h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><h3 id="获取URL参数"><a href="#获取URL参数" class="headerlink" title="获取URL参数"></a>获取URL参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">function resolveUrl(url)&#123;</div><div class="line">    var regParaName = /(\?|&amp;&#123;1,&#125;)([\w\.\-]&#123;0,&#125;)=?/g; //获取参数名的正则，正则只匹配数字、字母、下划线、横线、点</div><div class="line">    var result = &#123;&#125;;</div><div class="line"></div><div class="line">    if(typeof url == &apos;string&apos;)&#123;</div><div class="line">        cycleResolve()</div><div class="line">    &#125;else&#123;</div><div class="line">        result = url;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return url;</div><div class="line"></div><div class="line">    function cycleResolve()&#123;</div><div class="line">        var paraNameArr = regParaName.exec(url);</div><div class="line">        var paraValueReg;</div><div class="line">        var paraValueArr;</div><div class="line"></div><div class="line">        if(paraNameArr &amp;&amp; paraNameArr.length &gt; 2)&#123;</div><div class="line">            paraValueReg = new RegExp(&quot;\\&quot; + paraNameArr[0] + &quot;([\\u4e00-\\u9fa5\\.\\-\\w\\s]&#123;0,&#125;)\\&amp;&#123;0,&#125;&quot;);  //只能用构造函数的方式</div><div class="line">            paraValueArr = paraValueReg.exec(url);</div><div class="line">            result[paraNameArr[2]] = paraValueArr[1];</div><div class="line">            arguments.callee(); //循环执行</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function getUrlParams(name) &#123;</div><div class="line">    var reg = new RegExp(&quot;(^|&amp;)&quot; + name + &quot;=([^&amp;]*)(&amp;|$)&quot;);</div><div class="line">    var r = window.location.search.substr(1).match(reg);</div><div class="line">    return r != null ? unescape(r[2]) : null</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="移动端Media"><a href="#移动端Media" class="headerlink" title="移动端Media"></a>移动端Media</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">html&#123;font-size:10px&#125;</div><div class="line">@media screen and (min-width:321px) and (max-width:375px)&#123;html&#123;font-size:11px&#125;&#125;</div><div class="line">@media screen and (min-width:376px) and (max-width:414px)&#123;html&#123;font-size:12px&#125;&#125;</div><div class="line">@media screen and (min-width:415px) and (max-width:639px)&#123;html&#123;font-size:15px&#125;&#125;</div><div class="line">@media screen and (min-width:640px) and (max-width:719px)&#123;html&#123;font-size:20px&#125;&#125;</div><div class="line">@media screen and (min-width:720px) and (max-width:749px)&#123;html&#123;font-size:22.5px&#125;&#125;</div><div class="line">@media screen and (min-width:750px) and (max-width:799px)&#123;html&#123;font-size:23.5px&#125;&#125;</div><div class="line">@media screen and (min-width:800px)&#123;html&#123;font-size:25px&#125;&#125;</div></pre></td></tr></table></figure>
 <h3 id="IOS和安卓判断，判断是否微信"><a href="#IOS和安卓判断，判断是否微信" class="headerlink" title="IOS和安卓判断，判断是否微信"></a>IOS和安卓判断，判断是否微信</h3><ol>
 <li><p>安卓/IOS</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var u = navigator.userAgent, app = navigator.appVersion;</div><div class="line">var isAndroid = u.indexOf(&apos;Android&apos;) &gt; -1 || u.indexOf(&apos;Linux&apos;) &gt; -1 u.indexOf(&apos;MI&apos;) &gt; -1 || u.indexOf(&apos;XiaoMi&apos;) &gt; -1; //ad或者uc，小米等奇葩浏览器</div><div class="line">var isIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios</div><div class="line">return isAndroid ? &quot;it&apos;s android&quot; : isIos ? &quot;it&apos;s ios&quot; : &quot;what&apos;s the f**k&quot;;</div></pre></td></tr></table></figure>
@@ -417,22 +416,6 @@
         
       
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/02/28/获取URL参数/" rel="next" title="获取URL参数">
-                <i class="fa fa-chevron-left"></i> 获取URL参数
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
       
 
       
@@ -514,20 +497,21 @@
           <img class="site-author-image" itemprop="image"
                src="/uploads/avator.jpg"
                alt="Buns" />
-          <p class="site-author-name" itemprop="name">Buns</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
+          <p class="site-author-name" itemprop="name" style="color:#666"><!--Buns-->包子</p>
         </div>
         <nav class="site-state motion-element">
-        
+          <!--
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
+                <span class="site-state-item-count" style='display:inline;padding-left:10px;'>1</span>
               </a>
             </div>
+          
+          -->
+          
+            <p class="site-subtitle" style='color:#fc6423;text-decoration:underline'>年少不努力，老大跟猪睡</p>
           
 
           
@@ -600,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用函数"><span class="nav-number">1.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#移动端Media"><span class="nav-number">1.1.</span> <span class="nav-text">移动端Media</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOS和安卓判断，判断是否微信"><span class="nav-number">1.2.</span> <span class="nav-text">IOS和安卓判断，判断是否微信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#倒计时"><span class="nav-number">1.3.</span> <span class="nav-text">倒计时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期格式化"><span class="nav-number">1.4.</span> <span class="nav-text">日期格式化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用正则"><span class="nav-number">2.</span> <span class="nav-text">常用正则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-prototype"><span class="nav-number">3.</span> <span class="nav-text">String.prototype</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#金额格式化"><span class="nav-number">3.1.</span> <span class="nav-text">金额格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去除左右空格"><span class="nav-number">3.2.</span> <span class="nav-text">去除左右空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测数组元素"><span class="nav-number">3.3.</span> <span class="nav-text">检测数组元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测密码强度"><span class="nav-number">3.4.</span> <span class="nav-text">检测密码强度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断对象还是数组"><span class="nav-number">3.5.</span> <span class="nav-text">判断对象还是数组</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用函数"><span class="nav-number">1.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取URL参数"><span class="nav-number">1.1.</span> <span class="nav-text">获取URL参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动端Media"><span class="nav-number">1.2.</span> <span class="nav-text">移动端Media</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOS和安卓判断，判断是否微信"><span class="nav-number">1.3.</span> <span class="nav-text">IOS和安卓判断，判断是否微信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#倒计时"><span class="nav-number">1.4.</span> <span class="nav-text">倒计时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期格式化"><span class="nav-number">1.5.</span> <span class="nav-text">日期格式化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用正则"><span class="nav-number">2.</span> <span class="nav-text">常用正则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-prototype"><span class="nav-number">3.</span> <span class="nav-text">String.prototype</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#金额格式化"><span class="nav-number">3.1.</span> <span class="nav-text">金额格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去除左右空格"><span class="nav-number">3.2.</span> <span class="nav-text">去除左右空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测数组元素"><span class="nav-number">3.3.</span> <span class="nav-text">检测数组元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测密码强度"><span class="nav-number">3.4.</span> <span class="nav-text">检测密码强度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断对象还是数组"><span class="nav-number">3.5.</span> <span class="nav-text">判断对象还是数组</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -630,6 +614,17 @@
   <span class="author" itemprop="copyrightHolder">Buns</span>
 </div>
 
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
 
 
         
