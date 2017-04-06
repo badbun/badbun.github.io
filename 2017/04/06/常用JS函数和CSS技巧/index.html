@@ -1,0 +1,773 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="包子,前端,bun," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="花样百出花样百出
+这里罗列平时工作中比较常用的一些函数与字符处理，防止偶尔脑子短路，备查。持续更新……
+常用函数移动端Media12345678html&amp;#123;font-size:10px&amp;#125;@media screen and (min-width:321px) and (max-width:375px)&amp;#123;html&amp;#123;font-size:11px&amp;#125;&amp;#125">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用js函数与js扩展String.prototype实现格式金额、时间，常用CSS等">
+<meta property="og:url" content="http://badbun.github.io/2017/04/06/常用JS函数和CSS技巧/index.html">
+<meta property="og:site_name" content="Buns">
+<meta property="og:description" content="花样百出花样百出
+这里罗列平时工作中比较常用的一些函数与字符处理，防止偶尔脑子短路，备查。持续更新……
+常用函数移动端Media12345678html&amp;#123;font-size:10px&amp;#125;@media screen and (min-width:321px) and (max-width:375px)&amp;#123;html&amp;#123;font-size:11px&amp;#125;&amp;#125">
+<meta property="og:updated_time" content="2017-04-06T03:00:35.198Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用js函数与js扩展String.prototype实现格式金额、时间，常用CSS等">
+<meta name="twitter:description" content="花样百出花样百出
+这里罗列平时工作中比较常用的一些函数与字符处理，防止偶尔脑子短路，备查。持续更新……
+常用函数移动端Media12345678html&amp;#123;font-size:10px&amp;#125;@media screen and (min-width:321px) and (max-width:375px)&amp;#123;html&amp;#123;font-size:11px&amp;#125;&amp;#125">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://badbun.github.io/2017/04/06/常用JS函数和CSS技巧/"/>
+
+
+
+
+
+  <title> 常用js函数与js扩展String.prototype实现格式金额、时间，常用CSS等 | Buns </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Buns</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">少壮不努力，老大跟猪睡</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://badbun.github.io/2017/04/06/常用JS函数和CSS技巧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Buns">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Buns">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                常用js函数与js扩展String.prototype实现格式金额、时间，常用CSS等
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-06T10:00:19+08:00">
+                2017-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/06/常用JS函数和CSS技巧/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/06/常用JS函数和CSS技巧/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="花样百出花样百出"><a href="#花样百出花样百出" class="headerlink" title="花样百出花样百出"></a>花样百出花样百出</h2><blockquote>
+<p>这里罗列平时工作中比较常用的一些函数与字符处理，防止偶尔脑子短路，备查。持续更新……</p>
+<h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><h3 id="移动端Media"><a href="#移动端Media" class="headerlink" title="移动端Media"></a>移动端Media</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">html&#123;font-size:10px&#125;</div><div class="line">@media screen and (min-width:321px) and (max-width:375px)&#123;html&#123;font-size:11px&#125;&#125;</div><div class="line">@media screen and (min-width:376px) and (max-width:414px)&#123;html&#123;font-size:12px&#125;&#125;</div><div class="line">@media screen and (min-width:415px) and (max-width:639px)&#123;html&#123;font-size:15px&#125;&#125;</div><div class="line">@media screen and (min-width:640px) and (max-width:719px)&#123;html&#123;font-size:20px&#125;&#125;</div><div class="line">@media screen and (min-width:720px) and (max-width:749px)&#123;html&#123;font-size:22.5px&#125;&#125;</div><div class="line">@media screen and (min-width:750px) and (max-width:799px)&#123;html&#123;font-size:23.5px&#125;&#125;</div><div class="line">@media screen and (min-width:800px)&#123;html&#123;font-size:25px&#125;&#125;</div></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="IOS和安卓判断，判断是否微信"><a href="#IOS和安卓判断，判断是否微信" class="headerlink" title="IOS和安卓判断，判断是否微信"></a>IOS和安卓判断，判断是否微信</h3><ul>
+<li><p>安卓/IOS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var u = navigator.userAgent, app = navigator.appVersion;</div><div class="line">var isAndroid = u.indexOf(&apos;Android&apos;) &gt; -1 || u.indexOf(&apos;Linux&apos;) &gt; -1 u.indexOf(&apos;MI&apos;) &gt; -1 || u.indexOf(&apos;XiaoMi&apos;) &gt; -1; //ad或者uc，小米等奇葩浏览器</div><div class="line">var isIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios</div><div class="line">return isAndroid ? &quot;it&apos;s android&quot; : isIos ? &quot;it&apos;s ios&quot; : &quot;what&apos;s the f**k&quot;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>wechat</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function isWeiXin()&#123;</div><div class="line">    var ua = window.navigator.userAgent.toLowerCase();</div><div class="line">    if(ua.match(/MicroMessenger/i) == &apos;micromessenger&apos;)&#123;</div><div class="line">        return true;</div><div class="line">    &#125;else&#123;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="倒计时"><a href="#倒计时" class="headerlink" title="倒计时"></a>倒计时</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;time&quot;&gt;</div><div class="line">    &lt;span id=&quot;t_d&quot;&gt;00天&lt;/span&gt;</div><div class="line">    &lt;span id=&quot;t_h&quot;&gt;00时&lt;/span&gt;</div><div class="line">    &lt;span id=&quot;t_m&quot;&gt;00分&lt;/span&gt;</div><div class="line">    &lt;span id=&quot;t_s&quot;&gt;00秒&lt;/span&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    setInterval(function() &#123;</div><div class="line">        var EndTime = new Date(&apos;2017/12/31 00:00:00&apos;);</div><div class="line">        var NowTime = new Date();</div><div class="line">        var t = EndTime.getTime() - NowTime.getTime();</div><div class="line">        var d = 0,h = 0,m = 0,s = 0;</div><div class="line">        if (t &gt;= 0) &#123;</div><div class="line">            d = Math.floor(t / 1000 / 60 / 60 / 24);</div><div class="line">            h = Math.floor(t / 1000 / 60 / 60 % 24);</div><div class="line">            m = Math.floor(t / 1000 / 60 % 60);</div><div class="line">            s = Math.floor(t / 1000 % 60);</div><div class="line">        &#125;</div><div class="line">        document.getElementById(&quot;t_d&quot;).innerHTML = d + &quot;天&quot;;</div><div class="line">        document.getElementById(&quot;t_h&quot;).innerHTML = h + &quot;时&quot;;</div><div class="line">        document.getElementById(&quot;t_m&quot;).innerHTML = m + &quot;分&quot;;</div><div class="line">        document.getElementById(&quot;t_s&quot;).innerHTML = s + &quot;秒&quot;;</div><div class="line">    &#125;, 10);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h3 id="日期格式化"><a href="#日期格式化" class="headerlink" title="日期格式化"></a>日期格式化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">Date.prototype.Format = function(fmt) &#123;</div><div class="line">    var o = &#123;</div><div class="line">        &quot;y+&quot;: this.getFullYear(),//年</div><div class="line">        &quot;M+&quot;: this.getMonth() + 1,//月</div><div class="line">        &quot;d+&quot;: this.getDate(),//天</div><div class="line">        &quot;h+&quot;: this.getHours(),//时</div><div class="line">        &quot;m+&quot;: this.getMinutes(),//分</div><div class="line">        &quot;s+&quot;: this.getSeconds(),//秒</div><div class="line">        &quot;q+&quot;: Math.floor((this.getMonth() + 3 ) / 3),//季度</div><div class="line">        &quot;S&quot;: this.getMilliseconds()//毫秒</div><div class="line">    &#125;</div><div class="line">    for(var key in o) &#123;</div><div class="line">    var regExp = new RegExp(&quot;(&quot;+key+&quot;)&quot;);</div><div class="line">        if(regExp.test(fmt)) &#123;</div><div class="line">            var zero = &quot;&quot;;</div><div class="line">            for(var i = 0; i &lt; RegExp.$1.length; i++) &#123; zero += &quot;0&quot;; &#125;</div><div class="line">            var replacement = RegExp.$1.length == 1? o[key]:(zero+o[key]).substring(((&quot;&quot;+o[key]).length));</div><div class="line">            fmt = fmt.replace(RegExp.$1, replacement);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return fmt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>new Date().Format(&#39;yyyy年MM月dd日 hh时:mm分:ss秒&#39;) ===&gt; 2017年04月06日 10时:23分:19秒</code></p>
+<h2 id="常用正则"><a href="#常用正则" class="headerlink" title="常用正则"></a>常用正则</h2><ol>
+<li>汉字：<code>^[\u4e00-\u9fa5]{0,}$</code></li>
+<li>Email：<code>^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$</code></li>
+<li>URL：<code>URL: ^https?://([\w-]+.)+[\w-]+(/[\w-./?%&amp;=]*)?$</code></li>
+<li>手机号码：<code>^1\d{10}$</code></li>
+<li>身份证号：<code>^(\d{15}|\d{17}(\d|X))$</code></li>
+<li>邮政编码：<code>[1-9]\d{5}(?!\d) (邮政编码为6位数字)</code></li>
+<li>密码验证：<code>(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^[^\s\u4e00-\u9fa5]{6,16}$</code></li>
+<li>IP验证： <code>^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}$</code></li>
+</ol>
+</blockquote>
+<h2 id="String-prototype"><a href="#String-prototype" class="headerlink" title="String.prototype"></a>String.prototype</h2><h3 id="金额格式化"><a href="#金额格式化" class="headerlink" title="金额格式化"></a>金额格式化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">* 每三位逗号分隔 10,000.00</div><div class="line">* @param n 小数位</div><div class="line">* @return</div><div class="line">*/</div><div class="line">String.prototype.toThousands = function (n) &#123;</div><div class="line">    var n = n &gt; 0 &amp;&amp; n &lt;= 20 ? n : 2;</div><div class="line">    var s = this;</div><div class="line">    s = parseFloat((s + &quot;&quot;).replace(/[^\d\.-]/g, &quot;&quot;)).toFixed(n) + &quot;&quot;;</div><div class="line">    var l = s.split(&quot;.&quot;)[0].split(&quot;&quot;).reverse(), r = s.split(&quot;.&quot;)[1];</div><div class="line">    t = &quot;&quot;;</div><div class="line">    for (i = 0; i &lt; l.length; i++) &#123;</div><div class="line">        t += l[i] + ((i + 1) % 3 == 0 &amp;&amp; (i + 1) != l.length ? &quot;,&quot; : &quot;&quot;);</div><div class="line">    &#125;</div><div class="line">    return t.split(&quot;&quot;).reverse().join(&quot;&quot;) + &quot;.&quot; + r;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>var a = &#39;10000&#39;; console.log(a.toThousands(2))  ==&gt; 10,000.00</code></p>
+</blockquote>
+<h3 id="去除左右空格"><a href="#去除左右空格" class="headerlink" title="去除左右空格"></a>去除左右空格</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">*type string</div><div class="line">* @returns 处理后的字符串</div><div class="line">*/</div><div class="line">String.prototype.trim = function()&#123;</div><div class="line">    return this.replace(/(^\s*)|(\s*$)/g, &quot;&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>console.log(&quot; 我的 &quot;.trim()) ===&gt; 我的</code></p>
+<h3 id="检测数组元素"><a href="#检测数组元素" class="headerlink" title="检测数组元素"></a>检测数组元素</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Array.prototype.contains = function (v) &#123;</div><div class="line">    var index = -1;</div><div class="line">    for (var i = 0; i &lt; this.length; i++) &#123; if (this[i] == v) &#123; index = i; break; &#125; &#125;</div><div class="line">    return index;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>console.log(d.contains(6)); ===&gt;-1  不存在</code></p>
+<h3 id="检测密码强度"><a href="#检测密码强度" class="headerlink" title="检测密码强度"></a>检测密码强度</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">* 判断密码安全级别</div><div class="line">* @return n(强度)</div><div class="line">*/</div><div class="line">String.prototype.checkPwdLevel = function () &#123;</div><div class="line">    var n = 0;</div><div class="line">    if (/\d/.test(this)) n++; //包含数字</div><div class="line">    if (/[a-z]/.test(this)) n++; //包含小写字母</div><div class="line">    if (/[A-Z]/.test(this)) n++; //包含大写字母</div><div class="line">    if (this.length &lt;= 6) n = 1; //长度小于等于6位</div><div class="line">    return n;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>var a = &quot;xxG&quot;;console.log(a.checkPwdLevel(a)) ===&gt; 2</code></p>
+</blockquote>
+<h3 id="判断对象还是数组"><a href="#判断对象还是数组" class="headerlink" title="判断对象还是数组"></a>判断对象还是数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function isArray = function(o) &#123;</div><div class="line">    return toString.apply(o) === &apos;[object Array]&apos;;</div><div class="line">&#125;</div><div class="line">function isObject = function(o) &#123;</div><div class="line">    return toString.apply(o) === &apos;[object Object]&apos;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//或者这样</div><div class="line"></div><div class="line">var xx = &#123;&#125;,ww = [];</div><div class="line">Object.prototype.toString.call(xx) ===&gt; [object Object];</div><div class="line">Object.prototype.toString.call(ww) ===&gt; [object Array];</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/28/获取URL参数/" rel="next" title="获取URL参数">
+                <i class="fa fa-chevron-left"></i> 获取URL参数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/04/06/常用JS函数和CSS技巧/"
+     data-title="常用js函数与js扩展String.prototype实现格式金额、时间，常用CSS等"
+     data-content=""
+     data-url="http://badbun.github.io/2017/04/06/常用JS函数和CSS技巧/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/04/06/常用JS函数和CSS技巧/"
+           data-title="常用js函数与js扩展String.prototype实现格式金额、时间，常用CSS等" data-url="http://badbun.github.io/2017/04/06/常用JS函数和CSS技巧/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avator.jpg"
+               alt="Buns" />
+          <p class="site-author-name" itemprop="name">Buns</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/badbun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.txtea.cc/" title="Evan的博客" target="_blank">Evan的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.webclown.net/" title="keystion博客" target="_blank">keystion博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://f2er.club/" title="前端工具地址" target="_blank">前端工具地址</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.baidu.com" title="前端技术博客" target="_blank">前端技术博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#花样百出花样百出"><span class="nav-number">1.</span> <span class="nav-text">花样百出花样百出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用函数"><span class="nav-number">2.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#移动端Media"><span class="nav-number">2.1.</span> <span class="nav-text">移动端Media</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOS和安卓判断，判断是否微信"><span class="nav-number">2.2.</span> <span class="nav-text">IOS和安卓判断，判断是否微信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#倒计时"><span class="nav-number">2.3.</span> <span class="nav-text">倒计时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期格式化"><span class="nav-number">2.4.</span> <span class="nav-text">日期格式化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用正则"><span class="nav-number">3.</span> <span class="nav-text">常用正则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-prototype"><span class="nav-number">4.</span> <span class="nav-text">String.prototype</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#金额格式化"><span class="nav-number">4.1.</span> <span class="nav-text">金额格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去除左右空格"><span class="nav-number">4.2.</span> <span class="nav-text">去除左右空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测数组元素"><span class="nav-number">4.3.</span> <span class="nav-text">检测数组元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测密码强度"><span class="nav-number">4.4.</span> <span class="nav-text">检测密码强度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断对象还是数组"><span class="nav-number">4.5.</span> <span class="nav-text">判断对象还是数组</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Buns</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"imwillxue"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
