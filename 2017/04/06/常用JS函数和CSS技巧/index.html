@@ -91,15 +91,15 @@
 
 常用函数移动端Media12345678html&amp;#123;font-size:10px&amp;#125;@media screen and (min-width:321px) and (max-width:375px)&amp;#123;html&amp;#123;font-size:11px&amp;#125;&amp;#125;@media">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常用js函数与js扩展String.prototype实现格式金额、时间，常用CSS等">
+<meta property="og:title" content="常用js函数与字符串处理（金额、时间等）">
 <meta property="og:url" content="http://badbun.github.io/2017/04/06/常用JS函数和CSS技巧/index.html">
 <meta property="og:site_name" content="Buns">
 <meta property="og:description" content="这里罗列平时工作中比较常用的一些函数与字符处理，防止偶尔脑子短路，备查。持续更新……
 
 常用函数移动端Media12345678html&amp;#123;font-size:10px&amp;#125;@media screen and (min-width:321px) and (max-width:375px)&amp;#123;html&amp;#123;font-size:11px&amp;#125;&amp;#125;@media">
-<meta property="og:updated_time" content="2017-04-06T05:59:22.496Z">
+<meta property="og:updated_time" content="2017-04-06T06:03:03.767Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="常用js函数与js扩展String.prototype实现格式金额、时间，常用CSS等">
+<meta name="twitter:title" content="常用js函数与字符串处理（金额、时间等）">
 <meta name="twitter:description" content="这里罗列平时工作中比较常用的一些函数与字符处理，防止偶尔脑子短路，备查。持续更新……
 
 常用函数移动端Media12345678html&amp;#123;font-size:10px&amp;#125;@media screen and (min-width:321px) and (max-width:375px)&amp;#123;html&amp;#123;font-size:11px&amp;#125;&amp;#125;@media">
@@ -136,7 +136,7 @@
 
 
 
-  <title> 常用js函数与js扩展String.prototype实现格式金额、时间，常用CSS等 | Buns </title>
+  <title> 常用js函数与字符串处理（金额、时间等） | Buns </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -286,7 +286,7 @@
             
             
               
-                常用js函数与js扩展String.prototype实现格式金额、时间，常用CSS等
+                常用js函数与字符串处理（金额、时间等）
               
             
           </h1>
@@ -381,7 +381,9 @@
 <h3 id="去除左右空格"><a href="#去除左右空格" class="headerlink" title="去除左右空格"></a>去除左右空格</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">*type string</div><div class="line">* @returns 处理后的字符串</div><div class="line">*/</div><div class="line">String.prototype.trim = function()&#123;</div><div class="line">    return this.replace(/(^\s*)|(\s*$)/g, &quot;&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
 <p><code>console.log(&quot; 我的 &quot;.trim()) ===&gt; 我的</code></p>
+</blockquote>
 <h3 id="检测数组元素"><a href="#检测数组元素" class="headerlink" title="检测数组元素"></a>检测数组元素</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Array.prototype.contains = function (v) &#123;</div><div class="line">    var index = -1;</div><div class="line">    for (var i = 0; i &lt; this.length; i++) &#123; if (this[i] == v) &#123; index = i; break; &#125; &#125;</div><div class="line">    return index;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
 <p><code>console.log(d.contains(6)); ===&gt;-1  不存在</code></p>
 </blockquote>
 <h3 id="检测密码强度"><a href="#检测密码强度" class="headerlink" title="检测密码强度"></a>检测密码强度</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">* 判断密码安全级别</div><div class="line">* @return n(强度)</div><div class="line">*/</div><div class="line">String.prototype.checkPwdLevel = function () &#123;</div><div class="line">    var n = 0;</div><div class="line">    if (/\d/.test(this)) n++; //包含数字</div><div class="line">    if (/[a-z]/.test(this)) n++; //包含小写字母</div><div class="line">    if (/[A-Z]/.test(this)) n++; //包含大写字母</div><div class="line">    if (this.length &lt;= 6) n = 1; //长度小于等于6位</div><div class="line">    return n;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -443,7 +445,7 @@
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2017/04/06/常用JS函数和CSS技巧/"
-     data-title="常用js函数与js扩展String.prototype实现格式金额、时间，常用CSS等"
+     data-title="常用js函数与字符串处理（金额、时间等）"
      data-content=""
      data-url="http://badbun.github.io/2017/04/06/常用JS函数和CSS技巧/">
   <div class="ds-share-inline">
@@ -473,7 +475,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/04/06/常用JS函数和CSS技巧/"
-           data-title="常用js函数与js扩展String.prototype实现格式金额、时间，常用CSS等" data-url="http://badbun.github.io/2017/04/06/常用JS函数和CSS技巧/">
+           data-title="常用js函数与字符串处理（金额、时间等）" data-url="http://badbun.github.io/2017/04/06/常用JS函数和CSS技巧/">
       </div>
     
   </div>
