@@ -1,0 +1,785 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="包子,前端,bun,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="隔四年一更，我真是..差点失忆了。。  前言关于 APP 热更新（只是针对js、html等的更新） ，网上相关文章很多。集成 cordova-hot-code-push-plugin 插件后，按文档指引操作完成，基本可以完成该目标。这里要说的是，自己在实际操作过程中遇到的一些问题，做点记录。 一、添加热更新工具1npm install -g cordova-hot-code-push-cli 二">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cordova框架-热更新踩坑记录">
+<meta property="og:url" content="http://badbun.github.io/2021/04/26/Cordova框架-热更新踩坑记录/index.html">
+<meta property="og:site_name" content="Buns">
+<meta property="og:description" content="隔四年一更，我真是..差点失忆了。。  前言关于 APP 热更新（只是针对js、html等的更新） ，网上相关文章很多。集成 cordova-hot-code-push-plugin 插件后，按文档指引操作完成，基本可以完成该目标。这里要说的是，自己在实际操作过程中遇到的一些问题，做点记录。 一、添加热更新工具1npm install -g cordova-hot-code-push-cli 二">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-04-26T08:24:58.481Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cordova框架-热更新踩坑记录">
+<meta name="twitter:description" content="隔四年一更，我真是..差点失忆了。。  前言关于 APP 热更新（只是针对js、html等的更新） ，网上相关文章很多。集成 cordova-hot-code-push-plugin 插件后，按文档指引操作完成，基本可以完成该目标。这里要说的是，自己在实际操作过程中遇到的一些问题，做点记录。 一、添加热更新工具1npm install -g cordova-hot-code-push-cli 二">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://badbun.github.io/2021/04/26/Cordova框架-热更新踩坑记录/">
+
+
+
+
+
+  <title> Cordova框架-热更新踩坑记录 | Buns </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Buns</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://badbun.github.io/2021/04/26/Cordova框架-热更新踩坑记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Buns">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Buns">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Cordova框架-热更新踩坑记录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-26T16:20:09+08:00">
+                2021-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/04/26/Cordova框架-热更新踩坑记录/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2021/04/26/Cordova框架-热更新踩坑记录/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>隔四年一更，我真是..差点失忆了。。</p>
+</blockquote>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>关于 <code>APP 热更新</code>（只是针对js、html等的更新） ，网上相关文章很多。集成 <code>cordova-hot-code-push-plugin</code> 插件后，按文档指引操作完成，基本可以完成该目标。这里要说的是，自己在实际操作过程中遇到的一些问题，做点记录。</p>
+<h3 id="一、添加热更新工具"><a href="#一、添加热更新工具" class="headerlink" title="一、添加热更新工具"></a>一、添加热更新工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cordova-hot-code-push-cli</span><br></pre></td></tr></table></figure>
+<h3 id="二、添加插件"><a href="#二、添加插件" class="headerlink" title="二、添加插件"></a>二、添加插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> cordova</span><br><span class="line">cordova plugin add cordova-hot-code-push-plugin</span><br></pre></td></tr></table></figure>
+<h3 id="三、初始化配置文件"><a href="#三、初始化配置文件" class="headerlink" title="三、初始化配置文件"></a>三、初始化配置文件</h3><blockquote>
+<p>注意必须在 Cordova 工程根目录中执行该命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova-hcp init</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>执行该命令时，按要求从命令中填写一些信息：</p>
+<ul>
+<li>Project name：名称</li>
+<li>Amazon S3 Bucket name： 可以跳过</li>
+<li>Amazon S3 region： 可以跳过</li>
+<li>iOS app identifier： 应用程序商店的应用程序ID。App升级是跳转应用商店进行升级</li>
+<li>Android app identifier：可以App在应用商城的地址，或者是apk的下载地址</li>
+<li>Update method： 何时更新<ul>
+<li>start：在启动应用程序时安装更新</li>
+<li>resume：在恢复应用程序(从背景移动到前景状态)或启动时，安装更新；默认方式。</li>
+<li>now：从服务器加载更新后立即安装</li>
+</ul>
+</li>
+<li>content_url： 静态资源下载服务地址</li>
+</ul>
+<p>此时，<code>Cordova</code> 工程中根目录中会生成 <code>cordova-hcp.json</code> 文件，内容如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"xxx"</span>,</span><br><span class="line">  <span class="attr">"ios_identifier"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"android_identifier"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"update"</span>: <span class="string">"start"</span>,</span><br><span class="line">  <span class="attr">"min_native_interface"</span>: <span class="number">1</span>, <span class="comment">// 应用版本</span></span><br><span class="line">  <span class="attr">"content_url"</span>: <span class="string">"http://1.1.1.1/www"</span>  <span class="comment">// 静态资源在服务器上的地址，不能写错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="四、生成热更新配置文件"><a href="#四、生成热更新配置文件" class="headerlink" title="四、生成热更新配置文件"></a>四、生成热更新配置文件</h3><blockquote>
+<p>注意必须在 Cordova 工程根目录中执行该命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova-hcp build</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>执行该命令会在 <code>cordova/www</code> 目录中生成两个文件：<code>chcp.json</code>、<code>chcp.manifest</code>。</p>
+<ul>
+<li><p><code>chcp.json</code> 会在 <code>cordova-hcp.json</code> 文件内容的基础上，增加 <code>release</code> 字段，值为时间戳。此为唯 一 <code>WEB</code> 项目版本号，用与判断 <code>WEB</code> 内容是否存在新版本（是否更新）。</p>
+</li>
+<li><p><code>chcp.manifest</code> 中的内容为静态资源列表（带<code>HASH</code>），插件会通过 <code>HASH</code> 比对来判断哪些文件需要更新，来达到增量更新的目的。</p>
+</li>
+</ul>
+<h3 id="五、配置-config-xml"><a href="#五、配置-config-xml" class="headerlink" title="五、配置 config.xml"></a>五、配置 config.xml</h3><p>放到 <code>widget</code> 标签中即可。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;chcp&gt;</span><br><span class="line">  &lt;auto-download enabled="true" /&gt; // 是否自动下载热更新代码，默认是 true</span><br><span class="line">  &lt;auto-install enabled="true" /&gt; // 是否自动安装热更新代码，默认是 true</span><br><span class="line">  &lt;native-interface version="1" /&gt; // 当前 native side 的版本号</span><br><span class="line">  &lt;config-file url="http://1.1.1.1/www/chcp.json" /&gt; // 配置文件 chcp.json 从服务器上加载的路径（必须的配置项）</span><br><span class="line">&lt;/chcp&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="六、构建应用"><a href="#六、构建应用" class="headerlink" title="六、构建应用"></a>六、构建应用</h3><p>iOS：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cordova platform add ios</span><br><span class="line">cordova build ios</span><br></pre></td></tr></table></figure></p>
+<p>Android：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cordova platform add android</span><br><span class="line">cordova build android</span><br></pre></td></tr></table></figure></p>
+<p>构建并安装完成后，当前应用已具备热更新功能。</p>
+<h3 id="七、测试"><a href="#七、测试" class="headerlink" title="七、测试"></a>七、测试</h3><p>直接将更改后的静态资源文件构建。运行 <code>cordova-hcp build</code>，然后将 <code>www</code> 目录放至目标服务器指定目录中。</p>
+<blockquote>
+<p>文件上传地址必须与配置 <code>content_url</code> 和 <code>config.xml</code> 中的 <code>config-file</code> 一致，确保可访问，如：<a href="http://1.1.1.1/www/chcp.json" target="_blank" rel="noopener">http://1.1.1.1/www/chcp.json</a></p>
+</blockquote>
+<p>静态资源上传后，打开应用，此时应用会通过 <code>chcp.json</code> 中的 <code>release</code> 字段判断是否有版本更新。再获取 <code>manifest</code> 文件比较 <code>hash</code>，开始下载。</p>
+<p>热更新相关回调函数：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">chcp_updateIsReadyToInstall // web内容已经下载并可以安装时触发</span><br><span class="line">chcp_updateLoadFailed // 插件无法下载web更新时触发. 详细错误信息在事件参数里</span><br><span class="line">chcp_nothingToUpdate // 无可用更新下载时触发</span><br><span class="line">chcp_updateInstalled // web内容安装成功时触发</span><br><span class="line">chcp_updateInstallFailed // web内容安装失败时触发. 详细错误信息在事件参数里</span><br><span class="line">chcp_nothingToInstall // 无可用更新安装时触发</span><br><span class="line">chcp_assetsInstalledOnExternalStorage // 插件成功把app内置的web内容拷贝到外置存储中时触发. 你可能需要开发调试时用到这个事件，也许不会</span><br><span class="line">chcp_assetsInstallationError // 插件无法拷贝app内置的web内容到外置存储中时触发. 如果此事件发生了 - 插件不再工作. 也许是设备没有足够的存储空间导致.  详细错误信息在事件参数里</span><br></pre></td></tr></table></figure></p>
+<p>如测试是否安装成功：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'deviceready'</span>, onDeviceReady(), <span class="literal">false</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onDeviceReady</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 安装成功</span></span><br><span class="line">  <span class="built_in">document</span>.addEventListener(<span class="string">'chcp_updateInstalled'</span>, onUpdateReady(), <span class="literal">false</span>);</span><br><span class="line">  <span class="comment">// 安装失败</span></span><br><span class="line">  <span class="built_in">document</span>.addEventListener(<span class="string">'chcp_updateInstallFailed'</span>, onUpdateReady2(), <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="八、问题"><a href="#八、问题" class="headerlink" title="八、问题"></a>八、问题</h3><p>在验证完 <code>Android</code> 端功能正常后，终于搞定了。松了一口气再验一下 <code>iOS</code>，草，好了，又裂开了。~~</p>
+<h4 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h4><p>在 <code>cordova plugin add cordova-hot-code-push</code> 添加插件以后，再添加平台 <code>cordova platform add ios</code> 时，有以下警告：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[!] The `xxx [Debug]` target overrides the `GCC_PREPROCESSOR_DEFINITIONS` build setting defined in `Pods/Target Support Files/Pods-xxx/Pods-xxx.debug.xcconfig&apos;. This can lead to problems with the CocoaPods installation</span><br><span class="line"></span><br><span class="line">[!] The `xxx [Release]` target overrides the `GCC_PREPROCESSOR_DEFINITIONS` build setting defined in `Pods/Target Support Files/Pods-xxx/Pods-xxx.release.xcconfig&apos;. This can lead to problems with the CocoaPods installation</span><br><span class="line"></span><br><span class="line">- Use the `$(inherited)` flag, or</span><br><span class="line">- Remove the build settings from the target.</span><br><span class="line">- Use the `$(inherited)` flag, or</span><br><span class="line">- Remove the build settings from the target.</span><br></pre></td></tr></table></figure></p>
+<p>按指引，在 <code>xcode -&gt; build Setting -&gt; Preprocessor Macros</code> 中添加 <code>$(inherited)</code>后，终于 构建了。正开心……尼玛？ 应用无法启动。</p>
+<p>找了好些资料，说是 <code>cordova-hot-code-push</code> 已停止维护了，找了一个针对该插件二开的 <code>cordova-hot-code-push-plugin-renew</code> 重新集成，控制台不再告警了。</p>
+<p>然而…还是…..</p>
+<p>最终确认是由 <code>cocopods</code> 打包引起的，在 <code>plugins</code> 的 <code>cordova-hot-code-push-plugin-renew -&gt; scripts -&gt; lib -&gt; iosWKWebViewEngineSupport.js</code> 中的此处位置增加：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!isModified) &#123;</span><br><span class="line">  preprocessorDefs.push(injectedDefinition);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (preprocessorDefs.indexOf(<span class="string">'"$&#123;inherited&#125;"'</span>) === <span class="number">-1</span>) &#123;</span><br><span class="line">  preprocessorDefs.push(<span class="string">'"$&#123;inherited&#125;"'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>至此，重新构建后，测试热更新功能正常。~</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/06/常用JS函数和CSS技巧/" rel="next" title="常用js函数与字符串处理（金额、时间等）">
+                <i class="fa fa-chevron-left"></i> 常用js函数与字符串处理（金额、时间等）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2021/04/26/Cordova框架-热更新踩坑记录/" data-title="Cordova框架-热更新踩坑记录" data-content data-url="http://badbun.github.io/2021/04/26/Cordova框架-热更新踩坑记录/">
+  <div class="ds-share-inline">
+    <ul class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2021/04/26/Cordova框架-热更新踩坑记录/" data-title="Cordova框架-热更新踩坑记录" data-url="http://badbun.github.io/2021/04/26/Cordova框架-热更新踩坑记录/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avator.jpg" alt="Buns">
+          <p class="site-author-name" itemprop="name" style="color:#666"><!--Buns-->包子</p>
+        </div>
+        <nav class="site-state motion-element">
+          <!--
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-name">日志</span>
+                <span class="site-state-item-count" style='display:inline;padding-left:10px;'>2</span>
+              </a>
+            </div>
+          
+          -->
+          
+            <p class="site-subtitle" style="color:#fc6423;text-decoration:underline">年少不努力，老大跟猪睡</p>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/badbun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.txtea.cc/" title="Evan的博客" target="_blank">Evan的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.webclown.net/" title="keystion博客" target="_blank">keystion博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://f2er.club/" title="前端工具地址" target="_blank">前端工具地址</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.baidu.com" title="前端技术博客" target="_blank">前端技术博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、添加热更新工具"><span class="nav-number">2.</span> <span class="nav-text">一、添加热更新工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、添加插件"><span class="nav-number">3.</span> <span class="nav-text">二、添加插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、初始化配置文件"><span class="nav-number">4.</span> <span class="nav-text">三、初始化配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、生成热更新配置文件"><span class="nav-number">5.</span> <span class="nav-text">四、生成热更新配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、配置-config-xml"><span class="nav-number">6.</span> <span class="nav-text">五、配置 config.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、构建应用"><span class="nav-number">7.</span> <span class="nav-text">六、构建应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、测试"><span class="nav-number">8.</span> <span class="nav-text">七、测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、问题"><span class="nav-number">9.</span> <span class="nav-text">八、问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#现象"><span class="nav-number">9.1.</span> <span class="nav-text">现象</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Buns</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"imwillxue"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
